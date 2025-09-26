@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>JavaScript Handbook: 15 Chapters Interactive</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
   --bg: #0f1014;
@@ -17,6 +18,8 @@
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
+  --secondary-bg: #0a0b0e;
+  --text-secondary: #a0a4b8;
 }
 
 [data-theme="light"] {
@@ -28,6 +31,8 @@
   --success: #059669;
   --warning: #d97706;
   --error: #dc2626;
+  --secondary-bg: #e8eaf0;
+  --text-secondary: #5a5f7a;
 }
 
 body {
@@ -323,11 +328,134 @@ section.topic {
   transition: width 0.3s;
 }
 
+/* Footer Styles */
+.footer {
+  background: var(--secondary-bg);
+  color: var(--text-secondary);
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.contact-form {
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.contact-form h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  color: var(--fg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+  font-family: var(--sans);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--sans);
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
 @media (max-width: 700px) {
   .wwh-box { flex-direction: column; }
   .wwh-card { flex: 1 1 100%; }
   .code-actions {
     flex-wrap: wrap;
+  }
+  .social-links {
+    gap: 1rem;
+  }
+  .contact-form {
+    padding: 1.5rem;
+    margin: 0 1rem 2rem;
   }
 }
 
@@ -337,8 +465,55 @@ section.topic {
   <button class="toggle-theme" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
   <h1>JavaScript Handbook: 15 Chapters</h1>
   <main id="handbook"></main>
-  <script>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <!-- Social Links -->
+    <div class="social-links">
+      <a href="https://github.com/RatnadeepBose" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ratnadeepbose/" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://youtube.com/@ratnadeepbose" target="_blank" title="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://twitter.com/ratnadeepbose" target="_blank" title="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://hackerone.com/ratnadeepbose" target="_blank" title="HackerOne">
+        <i class="fas fa-bug"></i>
+      </a>
+    </div>
 
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h3>Contact Me</h3>
+      <form id="footerContactForm">
+        <div class="form-group">
+          <label for="footerName">Name</label>
+          <input type="text" id="footerName" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="footerEmail">Email</label>
+          <input type="email" id="footerEmail" name="email" placeholder="Your email" required />
+        </div>
+        <div class="form-group">
+          <label for="footerMessage">Message</label>
+          <textarea id="footerMessage" name="message" rows="4" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <!-- Copyright -->
+    <p>&copy; 2025 Ratnadeep Bose | Full-Stack Developer &amp; Cybersecurity Expert from West Bengal, India</p>
+  </footer>
+
+  <script>
 // Enhanced TOPICS array with hints and expected outputs
 const TOPICS = [
   {
@@ -667,11 +842,11 @@ console.log(triple(4));`,
   summary: "Organize code into reusable blueprints; extend one class from another for shared features.",
   what: "A class is a template for objects. Inheritance means a child class uses properties/methods of a parent.",
   why: "Helps model complex systems and avoid repeating code.",
-  how: "Use `class MyClass {}` and `extends`. Use methods and constructors.",
+  how: "Use \`class MyClass {}\` and \`extends\`. Use methods and constructors.",
   where: "Games, apps, anything with objects that can be specialized.",
   identify: "Look for class, extends, new.",
   usecase: "Blog post objects, animal subclasses, user types.",
-  notes: "Call `super()` in child class to run parent constructor.",
+  notes: "Call \`super()\` in child class to run parent constructor.",
   practices: [
     {
       code: `// SOLVED: Simple class and method
@@ -682,7 +857,7 @@ class Animal {
 let dog = new Animal("Max");
 console.log(dog.speak());`,
       description: "Define a class with a constructor and method. Create an object.",
-      hint: "`class`, `constructor`, `new`, and methods are the key concepts.",
+      hint: "\`class\`, \`constructor\`, \`new\`, and methods are the key concepts.",
       expected: "Max says hi!"
     },
     {
@@ -693,7 +868,7 @@ class Book {
 let b = new Book("JS", "Alex");
 console.log(b.title);`,
       description: "Write a constructor with two properties, instantiate the Book.",
-      hint: "`constructor(title, author) { this.title = title; ... }`",
+      hint: "\`constructor(title, author) { this.title = title; ... }\`",
       expected: "JS"
     },
     {
@@ -704,7 +879,7 @@ class Student {
 let s = new Student();
 console.log(s.greet());`,
       description: "Add a method to a simple class.",
-      hint: "`greet() { return ... }` inside class, then `new Student().greet()`",
+      hint: "\`greet() { return ... }\` inside class, then \`new Student().greet()\`",
       expected: "Hi!"
     },
     {
@@ -714,7 +889,7 @@ class Car extends Vehicle {}
 let c = new Car();
 console.log(c.honk());`,
       description: "Create a subclass and demonstrate inheritance.",
-      hint: "`extends Vehicle` and methods are inherited automatically.",
+      hint: "\`extends Vehicle\` and methods are inherited automatically.",
       expected: "Beep!"
     },
     {
@@ -724,7 +899,7 @@ class B extends A { y(){return this.x()+1;} }
 let b = new B();
 console.log(b.y());`,
       description: "A class can use inherited methods in its own logic.",
-      hint: "`this.x()` uses parent class's method.",
+      hint: "\`this.x()\` uses parent class's method.",
       expected: "8"
     }
   ]
@@ -735,7 +910,7 @@ console.log(b.y());`,
   summary: "Change HTML elements from JS: update, add, style, and react to the page.",
   what: "DOM: Document Object Model. JS interacts using selectors and properties.",
   why: "All web apps dynamically change content.",
-  how: "Get element using `document.getElementById()`; modify `.innerHTML`, `.style`.",
+  how: "Get element using \`document.getElementById()\`; modify \`.innerHTML\`, \`.style\`.",
   where: "UI updates, games, tools.",
   identify: "getElementById, createElement, appendChild.",
   usecase: "Add notifications, change colors, build components.",
@@ -746,7 +921,7 @@ console.log(b.y());`,
 // HTML: <div id="demo"></div>
 document.getElementById("demo").textContent = "Hello DOM!";`,
       description: "Select and change text of a DOM element.",
-      hint: "Use `textContent` or `innerHTML` to modify.",
+      hint: "Use \`textContent\` or \`innerHTML\` to modify.",
       expected: "Hello DOM!"
     },
     {
@@ -755,7 +930,7 @@ let p = document.createElement("p");
 p.textContent = "JS paragraph!";
 // TODO: attach p to <div id="play"></div>`,
       description: "Create an HTML element then add it to the page.",
-      hint: "`appendChild` puts the element in the DOM.",
+      hint: "\`appendChild\` puts the element in the DOM.",
       expected: "[Paragraph added]"
     },
     {
@@ -763,7 +938,7 @@ p.textContent = "JS paragraph!";
 let colorDiv = document.getElementById("colorMe");
 // TODO: set color`,
       description: "Set the color style property of a DOM element.",
-      hint: "`colorDiv.style.color = 'red';`",
+      hint: "\`colorDiv.style.color = 'red';\`",
       expected: "red"
     },
     {
@@ -772,7 +947,7 @@ let li = document.createElement("li");
 li.textContent = "Item";
 // TODO: append to list`,
       description: "Create and insert a new list item.",
-      hint: "`appendChild` adds to the `<ul>`.",
+      hint: "\`appendChild\` adds to the \`<ul>\`.",
       expected: "[Item added]"
     },
     {
@@ -791,7 +966,7 @@ box.innerHTML = "<b>Bold!</b>";`,
   summary: "Respond to user actions: clicks, typing, mouse movement, etc.",
   what: "Events: actions on elements. Listeners: code that reacts.",
   why: "Interactive apps depend on listening for events.",
-  how: "`addEventListener('event', fn)` attaches handlers.",
+  how: "\`addEventListener('event', fn)\` attaches handlers.",
   where: "Buttons, forms, games.",
   identify: "addEventListener, .onclick, .oninput.",
   usecase: "Show/hide, validate, respond.",
@@ -804,28 +979,28 @@ document.getElementById("b").onclick = function() {
   console.log("Clicked!");
 };`,
       description: "Add code to run upon button press.",
-      hint: "Use `.onclick` or `.addEventListener`.",
+      hint: "Use \`.onclick\` or \`.addEventListener\`.",
       expected: "Clicked!"
     },
     {
       code: `// On div id="hover" log "Hovered!" on mouseover
 document.getElementById("hover").addEventListener("mouseover", function(){console.log("Hovered!");});`,
       description: "React to mouseover event.",
-      hint: "`addEventListener('mouseover', ...)`",
+      hint: "\`addEventListener('mouseover', ...)\`",
       expected: "Hovered!"
     },
     {
       code: `// Run on input value change in <input id="inp">
 document.getElementById("inp").addEventListener("input", function(){console.log("Changed");})`,
       description: "Listen for input changes.",
-      hint: "`addEventListener('input', ...)`",
+      hint: "\`addEventListener('input', ...)\`",
       expected: "Changed"
     },
     {
       code: `// Prevent form submit reload
 document.getElementById("quiz").addEventListener("submit", function(e) { e.preventDefault(); });`,
       description: "Stop default form reload.",
-      hint: "`e.preventDefault();`",
+      hint: "\`e.preventDefault();\`",
       expected: "[no reload]"
     },
     {
@@ -833,7 +1008,7 @@ document.getElementById("quiz").addEventListener("submit", function(e) { e.preve
 let n = 0;
 document.getElementById("btn").onclick = ()=>console.log(++n);`,
       description: "Increment and print variable each click.",
-      hint: "`++n` increases n by 1.",
+      hint: "\`++n\` increases n by 1.",
       expected: "[number grows each click]"
     }
   ]
@@ -844,7 +1019,7 @@ document.getElementById("btn").onclick = ()=>console.log(++n);`,
   summary: "Read input from users via forms; validate and process it.",
   what: "Forms: HTML for user data. JS grabs data and processes.",
   why: "Web apps need data from users.",
-  how: "Use `.value` property of form/input elements.",
+  how: "Use \`.value\` property of form/input elements.",
   where: "Logins, quizzes, search boxes.",
   identify: "form, input, .onsubmit.",
   usecase: "Calculators, signup, question-answer.",
@@ -857,7 +1032,7 @@ document.getElementById("add").onclick = function() {
   console.log(sum);
 };`,
       description: "Get values from inputs, sum, and output.",
-      hint: "Use `.value` and convert with `Number()`.",
+      hint: "Use \`.value\` and convert with \`Number()\`.",
       expected: "[sum output]"
     },
     {
@@ -866,14 +1041,14 @@ document.getElementById("show").onclick = function() {
   console.log(document.getElementById("name").value);
 };`,
       description: "Read and print user input from a field.",
-      hint: "Use `document.getElementById('name').value`.",
+      hint: "Use \`document.getElementById('name').value\`.",
       expected: "[input value]"
     },
     {
       code: `// Prevent form reload on submit
 document.getElementById("myform").onsubmit = function(e) { e.preventDefault(); };`,
       description: "Stop default form behavior.",
-      hint: "Call `e.preventDefault();` inside handler.",
+      hint: "Call \`e.preventDefault();\` inside handler.",
       expected: "[no reload]"
     },
     {
@@ -898,17 +1073,17 @@ if (v === "") console.log("empty");`,
   summary: "Run code after a delay, at intervals, or fetch data from APIs without blocking your app.",
   what: "Async: code that runs now and later. Includes setTimeout, setInterval, Promises, fetch.",
   why: "Needed for data requests, timers, animations.",
-  how: "`setTimeout`, `setInterval`, `Promise`, `fetch`, `async/await`.",
+  how: "\`setTimeout\`, \`setInterval\`, \`Promise\`, \`fetch\`, \`async/await\`.",
   where: "APIs, games, updating UI.",
   identify: "setTimeout, setInterval, fetch, then, async.",
   usecase: "Animation, polling, real-time chat, loading data.",
-  notes: "Use async/await for clear code; `fetch` requests remote data.",
+  notes: "Use async/await for clear code; \`fetch\` requests remote data.",
   practices: [
     {
       code: `// SOLVED: Print 'waited' after 1 second
 setTimeout(()=>console.log('waited'), 1000);`,
       description: "Set a timer to delay code execution.",
-      hint: "`setTimeout(fn, ms)` runs once after ms milliseconds.",
+      hint: "\`setTimeout(fn, ms)\` runs once after ms milliseconds.",
       expected: "waited"
     },
     {
@@ -919,14 +1094,14 @@ let c=0,id=setInterval(()=>{
   if(c===3) clearInterval(id);
 },500);`,
       description: "Repeat a task at an interval.",
-      hint: "Use `setInterval`. To stop, use `clearInterval`.",
+      hint: "Use \`setInterval\`. To stop, use \`clearInterval\`.",
       expected: "tick\ntick\ntick"
     },
     {
       code: `// Use Promise to print after 800ms
 new Promise(res=>setTimeout(res,800)).then(()=>console.log("later"));`,
       description: "Create a promise that waits then resolves.",
-      hint: "`then` runs when promise resolved.",
+      hint: "\`then\` runs when promise resolved.",
       expected: "later"
     },
     {
@@ -956,7 +1131,7 @@ console.log("A"); setTimeout(()=>console.log("B"),1); console.log("C");`,
   summary: "Draw shapes, text, and images in browser for games and data display.",
   what: "Canvas HTML element. JS paints with commands.",
   why: "Custom graphics, games, charts.",
-  how: "Get context: `getContext('2d')`; use fillRect, arc, fillText.",
+  how: "Get context: \`getContext('2d')\`; use fillRect, arc, fillText.",
   where: "Games, data graphics.",
   identify: "canvas, fillRect, arc, fillText.",
   usecase: "Bouncing ball, drawing app, bar chart.",
@@ -1397,6 +1572,27 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('themeBtn').textContent = savedTheme === 'light' ? "🌙 Dark" : "☀️ Light";
 });
 
+// Footer contact form handling
+document.getElementById('footerContactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const submitBtn = this.querySelector('.submit-btn');
+  const originalText = submitBtn.innerHTML;
+
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  submitBtn.disabled = true;
+
+  setTimeout(() => {
+    submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+    submitBtn.style.background = 'var(--success)';
+    setTimeout(() => {
+      submitBtn.innerHTML = originalText;
+      submitBtn.style.background = 'var(--accent)';
+      submitBtn.disabled = false;
+      this.reset();
+      alert('Thank you for reaching out! I will get back to you soon.');
+    }, 2000);
+  }, 1500);
+});
   </script>
 </body>
 </html>
